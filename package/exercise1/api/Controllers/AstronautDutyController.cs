@@ -106,52 +106,5 @@ namespace StargateAPI.Controllers
                 });
             }      
         }
-
-        [HttpPut("")]
-        public async Task<IActionResult> UpdateAstronautDuty([FromBody] AstronautDuty request)
-        {
-            try
-            {
-                var result = await _mediator.Send(new UpdateAstronautDuty()
-                {
-                    Name = request.Person?.Name ?? string.Empty,
-                    Rank = request.Rank,
-                    DutyTitle = request.DutyTitle,
-                    DutyStartDate = request.DutyStartDate,
-                    DutyEndDate = request.DutyEndDate
-                });
-                return this.GetResponse(result);         
-            }
-            catch(BadHttpRequestException ex)
-            {
-                await _mediator.Send(new CreateLogMessage()
-                {
-                    Message = ex.Message,
-                    IsError = true,
-                    ErrorCode = (int)HttpStatusCode.BadRequest
-                });
-                return this.GetResponse(new BaseResponse()
-                {
-                    Message = ex.Message,
-                    Success = false,
-                    ResponseCode = (int)HttpStatusCode.BadRequest
-                });
-            }
-            catch (Exception ex)
-            {
-                await _mediator.Send(new CreateLogMessage()
-                {
-                    Message = ex.Message,
-                    IsError = true,
-                    ErrorCode = (int)HttpStatusCode.InternalServerError
-                });
-                return this.GetResponse(new BaseResponse()
-                {
-                    Message = ex.Message,
-                    Success = false,
-                    ResponseCode = (int)HttpStatusCode.InternalServerError
-                });
-            }      
-        }
     }
 }

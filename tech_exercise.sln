@@ -12,7 +12,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StargateAPI", "package\exer
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{18710450-5C78-568A-A6CD-57B4F1EBC85E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StargateAPI.Tests", "package\exercise1\tests\StargateAPI.Tests\StargateAPI.Tests.csproj", "{8F3A4D4F-A694-460F-B82D-B05F78796C89}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StargateAPI.Tests", "package\exercise1\tests\StargateAPI.Tests.csproj", "{8F3A4D4F-A694-460F-B82D-B05F78796C89}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

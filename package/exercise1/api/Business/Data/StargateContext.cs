@@ -10,7 +10,7 @@ namespace StargateAPI.Business.Data
         public DbSet<AstronautDetail> AstronautDetails { get; set; }
         public DbSet<AstronautDuty> AstronautDuties { get; set; }
         public DbSet<Log> Logs { get; set; }
-        public DbSet<Person> People { get; set; }
+        public virtual DbSet<Person> People { get; set; }
         public StargateContext(DbContextOptions<StargateContext> options)
         : base(options)
         {

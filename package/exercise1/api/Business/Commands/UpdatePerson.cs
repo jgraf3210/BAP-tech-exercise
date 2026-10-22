@@ -40,7 +40,7 @@ namespace StargateAPI.Business.Commands
         {
             var person =  await _context.People.FirstOrDefaultAsync(z => z.Name == request.Name, cancellationToken);
 
-            await _context.People.UpdateAsync(person, cancellationToken);
+            _context.People.Update(person);
 
             await _context.SaveChangesAsync(cancellationToken);
 
