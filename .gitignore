@@ -3,6 +3,7 @@ package/exercise1/api/obj
 package/exercise1/front-end/node_modules
 package/exercise1/front-end/.vscode
 package/exercise1/front-end/dist
+package/exercise1/front-end/.angular
 package/exercise1/tests/bin
 package/exercise1/tests/Debug
 package/exercise1/tests/net8.0

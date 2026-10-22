@@ -33,18 +33,11 @@
     margin: 0 auto;
   }
   
-  .nav-links {
-    display: flex;
-    list-style: none;
-    gap: 15px;
-  }
-  
   .nav-links a, .nav-brand {
     color: white;
     text-decoration: none;
   }
   
-  /* Style applied automatically when the route matches */
   .active-link {
     font-weight: bold;
     border-bottom: 2px solid #00bcd4;

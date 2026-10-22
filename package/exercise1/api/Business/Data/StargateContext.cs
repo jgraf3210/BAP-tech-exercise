@@ -7,9 +7,9 @@ namespace StargateAPI.Business.Data
     {
         public IDbConnection Connection => Database.GetDbConnection();
 
-        public DbSet<AstronautDetail> AstronautDetails { get; set; }
-        public DbSet<AstronautDuty> AstronautDuties { get; set; }
-        public DbSet<Log> Logs { get; set; }
+        public virtual DbSet<AstronautDetail> AstronautDetails { get; set; }
+        public virtual DbSet<AstronautDuty> AstronautDuties { get; set; }
+        public virtual DbSet<Log> Logs { get; set; }
         public virtual DbSet<Person> People { get; set; }
         public StargateContext(DbContextOptions<StargateContext> options)
         : base(options)

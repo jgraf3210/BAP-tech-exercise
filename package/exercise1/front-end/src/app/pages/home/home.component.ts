@@ -1,8 +1,11 @@
-import { Component, inject, OnInit } from "@angular/core";
+import { Component, inject, OnInit, signal } from "@angular/core";
 import { MatProgressBarModule } from "@angular/material/progress-bar";
 import { CommonModule } from '@angular/common';
-import { Person } from "../../../../models";
+import { Router } from '@angular/router';
+import { PersonAstronaut } from "../../../../models";
 import { PersonsService } from "../../services/persons.services";
+import { MatDialog } from "@angular/material/dialog";
+import { ViewPersonDutyDialogComponent } from "./view-person-duty-dialog/view-person-duty-dialog.component";
 
 
 @Component({
@@ -17,22 +20,36 @@ import { PersonsService } from "../../services/persons.services";
 export class HomeComponent implements OnInit{
 
   public personsService = inject(PersonsService)
-  public persons: Person[] = []
+  private readonly router = inject(Router)
+  public persons = signal<PersonAstronaut[]>([])
   public title = 'Home page'
+
+  constructor(
+    private readonly dialog: MatDialog
+  ){
+
+  }
   
-  ngOnInit(): void {
-    this.personsService.getAllPeople().then(persons => {
-      this.persons = persons;
-    });
+  async ngOnInit(): Promise<void> {
+    this.persons.set(await this.personsService.getAllPeople());
   }
 
-  calculateProgress(startDate: Date, endDate: Date): number {
-    const now = new Date().getTime();
-    const start = new Date(startDate).getTime();
-    const end = new Date(endDate).getTime();
-    const elapsed = now - start;
-    const total = end - start;
-    return Math.min((elapsed / total) * 100, 100); // Ensure it doesn't exceed 100%
+  public viewPerson(person: PersonAstronaut): void {
+    void this.router.navigate(['/view'], { state: { person } });
   }
+
+  /**
+   * Opens a dialog to edit the selected Item
+   * @param item The Item to edit
+   */
+  public editItem(person: PersonAstronaut) {
+    this.dialog.open(
+      ViewPersonDutyDialogComponent, {
+      data: {
+        person: person
+      },
+    }).afterClosed().subscribe()
+  }
+
 
 }

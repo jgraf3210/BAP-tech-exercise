@@ -14,7 +14,7 @@ public class CreateLogMessageTests
     [Fact]
     public void VerifyAddLogMessage()
     {
-        
+        //Verify that Logs are added when running the command
     }
 
 }

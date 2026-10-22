@@ -7,33 +7,28 @@ public class CreateAstronautDutyTests
 {
     
     public Mock<StargateContext> _context = new Mock<StargateContext>();
-
-
+    
     public CreateAstronautDutyTests()
     {
         
     }
 
-
     [Fact]
     public void VerifyAdd()
     {
-        // Given
-    
-        // When
-    
-        // Then
+        //Write test to verify that AstronautDutys are added under happy path
     }
 
+    [Fact]
     public void VerifyBadRequestWhenDutyExists()
     {
-        
+        //Verify that a BadRequest error is sent when a Person already has an assigned AstronautDuty
     }
 
-
+    [Fact]
     public void VerifyBadRequestWhenPersonNotExists()
     {
-        
+        //Verify that a BadRequest error is sent when the Person does not exist        
     }
 
 

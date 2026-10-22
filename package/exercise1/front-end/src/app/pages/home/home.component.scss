@@ -1,0 +1,15 @@
+.people-table {
+  width: 50%;
+  margin: 0 auto;
+  border-collapse: collapse;
+}
+
+.people-table th,
+.people-table td {
+  border: 1px solid currentColor;
+  padding: 0.5rem;
+}
+
+.person-row {
+  cursor: pointer;
+}

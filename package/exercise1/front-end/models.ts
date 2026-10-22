@@ -5,6 +5,15 @@ export interface Person {
   astronautDuty: AstronautDuty;  
 }
 
+export interface PersonAstronaut {
+  personId: number;
+  name: string;
+  currentRank: string | null;
+  currentDutyTitle: string | null;
+  careerStartDate: Date | null;
+  careerEndDate: Date | null;
+}
+
 export interface AstronautDetail {
   id: number;
   personId: number;
@@ -25,3 +34,9 @@ export interface AstronautDuty {
   person: Person;
 }
 
+export interface GetAllPeopleResponse {
+  people: PersonAstronaut[],
+  success: boolean,
+  message: string,
+  responseCode: number
+}

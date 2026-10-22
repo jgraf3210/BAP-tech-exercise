@@ -17,16 +17,13 @@ public class CreatePersonTests
     [Fact]
     public void VerifyAdd()
     {
-        // Given
-    
-        // When
-    
-        // Then
+        //Verify that a Person is added under happy path conditions
     }
 
+    [Fact]
     public void VerifyBadRequestWhenPersonExists()
     {
-        
+        //Verify that a BadRequest error is sent out when the Person already exists in the database
     }
 
 }

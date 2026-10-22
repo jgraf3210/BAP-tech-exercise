@@ -1,0 +1,13 @@
+<div>
+
+  <div>
+    <header>
+      <h1>{{title}}</h1>
+    </header>
+
+    <section *ngIf="person as selectedPerson">
+      <h2>{{ selectedPerson.name }}</h2>
+      <p>Rank: {{ selectedPerson.currentRank || '—' }}</p>
+      <p>Current duty: {{ selectedPerson.currentDutyTitle || '—' }}</p>
+    </section>
+</div>
