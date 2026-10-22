@@ -1,0 +1,36 @@
+<div>
+
+  <header>
+    <h1>{{title}}</h1>
+  </header>
+
+  <div>
+    <header>
+      <h1>{{title}}</h1>
+    </header>
+  
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Duty</th>
+          <th>Time Remaining</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let person of persons">
+          <td>{{ person.name }}</td>
+          <td>{{ person.astronautDuty.dutyTitle }}</td>
+          <td>
+            <div class="progress-bar-container">
+              <mat-progress-bar mode="determinate"
+                                [value]="calculateProgress(person.astronautDetail.careerStartDate, person.astronautDetail.careerEndDate)"/>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  
+</div>
