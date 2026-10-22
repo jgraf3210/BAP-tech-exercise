@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using StargateAPI.Business.Commands;
+using StargateAPI.Business.Data;
 using StargateAPI.Business.Queries;
 using System.Net;
 
@@ -40,14 +41,14 @@ namespace StargateAPI.Controllers
             }
         }
 
-        [HttpGet("{name}")]
-        public async Task<IActionResult> GetPersonByName(string name)
+        [HttpPost("get")]
+        public async Task<IActionResult> GetPersonByName([FromBody] Person person)
         {
             try
             {
                 var result = await _mediator.Send(new GetPersonByName()
                 {
-                    Name = name
+                    Name = person.Name
                 });
 
                 return this.GetResponse(result);
