@@ -8,7 +8,9 @@ import { AstronautDuty, GetAstronautDutyByPersonNameResponse } from "../../../mo
 export class DutyService {
 
   public readonly baseUrl: string = 'http://localhost:5204/astronautDuty';
-  constructor(private readonly http: HttpClient) {
+  constructor(
+    private readonly http: HttpClient
+  ) {
 
   }
 

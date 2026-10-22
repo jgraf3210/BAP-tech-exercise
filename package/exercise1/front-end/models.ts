@@ -41,6 +41,10 @@ export interface GetAllPeopleResponse {
   responseCode: number
 }
 
+export interface GetPersonResponse {
+  person: PersonAstronaut
+}
+
 export interface GetAstronautDutyByPersonNameResponse {
   person: PersonAstronaut,
   astronautDuties: AstronautDuty[]

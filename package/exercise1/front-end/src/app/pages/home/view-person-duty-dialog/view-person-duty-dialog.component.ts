@@ -10,21 +10,7 @@ import { AstronautDuty } from '../../../../../models';
 @Component({
   selector: 'app-person-duty-dialog',
   templateUrl: './view-person-duty-dialog.component.html',
-  styles: [`
-    .duty-table {
-      width: 100%;
-      margin: 0.75rem 0;
-      border-collapse: collapse;
-    }
-
-    .duty-table th,
-    .duty-table td {
-      box-sizing: border-box;
-      padding: 0.75rem;
-      border: 1px solid currentColor;
-      overflow-wrap: anywhere;
-    }
-  `],
+  styleUrls: ['./view-person-duty-dialog.component.scss'],
   imports: [
     CommonModule
 ]
@@ -41,7 +27,6 @@ export class ViewPersonDutyDialogComponent implements OnInit {
 
   constructor() {
     this.title = `${this.data.name} duties`
-  
   }
 
   async ngOnInit(): Promise<void> {

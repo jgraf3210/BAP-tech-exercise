@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Person, PersonAstronaut, GetAllPeopleResponse } from "../../../models";
+import { Person, PersonAstronaut, GetAllPeopleResponse, GetPersonResponse } from "../../../models";
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,9 @@ export class PersonsService {
 
   public readonly baseUrl: string = 'http://localhost:5204/person';
 
-  constructor(private readonly http: HttpClient) {
+  constructor(
+    private readonly http: HttpClient
+  ) {
 
   }
 
@@ -29,13 +31,15 @@ export class PersonsService {
   /**
    * Returns a single person from the database based on the provided name
    */
-  public async getPersonByName(person: Person): Promise<Person> {
+  public async getPersonByName(person: Person): Promise<PersonAstronaut> {
     let url = this.baseUrl + '/get';
 
-    return new Promise<Person>((resolve, reject) =>
-      this.http.post<Person>(url, person.name)
+    return new Promise<PersonAstronaut>((resolve, reject) =>
+      this.http.post<GetPersonResponse>(url, 
+        JSON.stringify(person.name),
+        { headers: { 'Content-Type': 'application/json' } })
         .subscribe({
-          next: (items: Person) => resolve(items),
+          next: (response: GetPersonResponse) => resolve(response.person),
           error: (error: Error) => reject(error)
         })
     );
