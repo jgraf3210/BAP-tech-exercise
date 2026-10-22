@@ -7,6 +7,8 @@ namespace StargateAPI.Business.Commands
     public class CreateLogMessage : IRequest<CreateLogMessageResult>
     {
         public required string Message { get; set; } = string.Empty;
+        public required bool IsError { get; set; }
+        public required int? ErrorCode { get; set; } = null;
     }
 
     public class CreateLogMessageHandler : IRequestHandler<CreateLogMessage, CreateLogMessageResult>
@@ -19,12 +21,14 @@ namespace StargateAPI.Business.Commands
         }
         public async Task<CreateLogMessageResult> Handle(CreateLogMessage request, CancellationToken cancellationToken)
         {
-            var newLogMessage = new ErrorLog()
+            var newLogMessage = new Log()
             {
-                Message = request.Message
+                Message = request.Message,
+                IsError = request.IsError,
+                ErrorCode = request.ErrorCode
             };
 
-            await _context.ErrorLogs.AddAsync(newLogMessage, cancellationToken);
+            await _context.Logs.AddAsync(newLogMessage, cancellationToken);
 
             await _context.SaveChangesAsync(cancellationToken);
 

@@ -11,8 +11,8 @@ using StargateAPI.Business.Data;
 namespace StargateAPI.Migrations
 {
     [DbContext(typeof(StargateContext))]
-    [Migration("20261022034327_add-database-logging-table")]
-    partial class adddatabaseloggingtable
+    [Migration("20261022163253_add-log-table")]
+    partial class addlogtable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -49,6 +49,16 @@ namespace StargateAPI.Migrations
                         .IsUnique();
 
                     b.ToTable("AstronautDetail");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CareerStartDate = new DateTime(2026, 10, 22, 11, 32, 52, 919, DateTimeKind.Local).AddTicks(9190),
+                            CurrentDutyTitle = "Commander",
+                            CurrentRank = "1LT",
+                            PersonId = 1
+                        });
                 });
 
             modelBuilder.Entity("StargateAPI.Business.Data.AstronautDuty", b =>
@@ -79,6 +89,42 @@ namespace StargateAPI.Migrations
                     b.HasIndex("PersonId");
 
                     b.ToTable("AstronautDuty");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DutyStartDate = new DateTime(2026, 10, 22, 11, 32, 52, 919, DateTimeKind.Local).AddTicks(9222),
+                            DutyTitle = "Commander",
+                            PersonId = 1,
+                            Rank = "1LT"
+                        });
+                });
+
+            modelBuilder.Entity("StargateAPI.Business.Data.Log", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("ErrorCode")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("IsError")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Message")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("StackTrace")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Log");
                 });
 
             modelBuilder.Entity("StargateAPI.Business.Data.Person", b =>
@@ -94,6 +140,18 @@ namespace StargateAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Person");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "John Doe"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Jane Doe"
+                        });
                 });
 
             modelBuilder.Entity("StargateAPI.Business.Data.AstronautDetail", b =>

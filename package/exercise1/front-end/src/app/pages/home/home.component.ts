@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from "@angular/core";
 import { MatProgressBarModule } from "@angular/material/progress-bar";
-import { CommonModule } from "../../../../node_modules/@angular/common";
+import { CommonModule } from '@angular/common';
 import { Person } from "../../../../models";
 import { PersonsService } from "../../services/persons.services";
 

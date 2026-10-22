@@ -2,7 +2,7 @@ export interface Person {
   id: number;
   name: string;
   astronautDetail: AstronautDetail;
-  astronautDuty: AstronautDuty[];  
+  astronautDuty: AstronautDuty;  
 }
 
 export interface AstronautDetail {
