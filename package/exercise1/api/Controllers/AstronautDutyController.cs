@@ -17,8 +17,8 @@ namespace StargateAPI.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet("{name}")]
-        public async Task<IActionResult> GetAstronautDutiesByName(string name)
+        [HttpPost("get")]
+        public async Task<IActionResult> GetAstronautDutiesByName([FromBody] string name)
         {
             try
             {
@@ -29,20 +29,43 @@ namespace StargateAPI.Controllers
 
                 return this.GetResponse(result);
             }
+            catch(BadHttpRequestException ex)
+            {
+                await _mediator.Send(new CreateLogMessage()
+                {
+                    Message = ex.Message,
+                    IsError = true,
+                    ErrorCode = (int)HttpStatusCode.BadRequest
+                });
+                return this.GetResponse(new BaseResponse()
+                {
+                    Message = ex.Message,
+                    Success = false,
+                    ResponseCode = (int)HttpStatusCode.BadRequest
+                });
+            }
             catch (Exception ex)
             {
+                await _mediator.Send(new CreateLogMessage()
+                {
+                    Message = ex.Message,
+                    IsError = true,
+                    ErrorCode = (int)HttpStatusCode.InternalServerError
+                });
                 return this.GetResponse(new BaseResponse()
                 {
                     Message = ex.Message,
                     Success = false,
                     ResponseCode = (int)HttpStatusCode.InternalServerError
                 });
-            }            
+            }
         }
 
         [HttpPost("")]
         public async Task<IActionResult> CreateAstronautDuty([FromBody] AstronautDuty request)
         {
+            try
+            {
                 var result = await _mediator.Send(new CreateAstronautDuty()
                 {
                     Name = request.Person?.Name ?? string.Empty,
@@ -50,7 +73,85 @@ namespace StargateAPI.Controllers
                     DutyTitle = request.DutyTitle,
                     DutyStartDate = request.DutyStartDate
                 });
-                return this.GetResponse(result);           
+                return this.GetResponse(result);         
+            }
+            catch(BadHttpRequestException ex)
+            {
+                await _mediator.Send(new CreateLogMessage()
+                {
+                    Message = ex.Message,
+                    IsError = true,
+                    ErrorCode = (int)HttpStatusCode.BadRequest
+                });
+                return this.GetResponse(new BaseResponse()
+                {
+                    Message = ex.Message,
+                    Success = false,
+                    ResponseCode = (int)HttpStatusCode.BadRequest
+                });
+            }
+            catch (Exception ex)
+            {
+                await _mediator.Send(new CreateLogMessage()
+                {
+                    Message = ex.Message,
+                    IsError = true,
+                    ErrorCode = (int)HttpStatusCode.InternalServerError
+                });
+                return this.GetResponse(new BaseResponse()
+                {
+                    Message = ex.Message,
+                    Success = false,
+                    ResponseCode = (int)HttpStatusCode.InternalServerError
+                });
+            }      
+        }
+
+        [HttpPut("")]
+        public async Task<IActionResult> UpdateAstronautDuty([FromBody] AstronautDuty request)
+        {
+            try
+            {
+                var result = await _mediator.Send(new UpdateAstronautDuty()
+                {
+                    Name = request.Person?.Name ?? string.Empty,
+                    Rank = request.Rank,
+                    DutyTitle = request.DutyTitle,
+                    DutyStartDate = request.DutyStartDate,
+                    DutyEndDate = request.DutyEndDate
+                });
+                return this.GetResponse(result);         
+            }
+            catch(BadHttpRequestException ex)
+            {
+                await _mediator.Send(new CreateLogMessage()
+                {
+                    Message = ex.Message,
+                    IsError = true,
+                    ErrorCode = (int)HttpStatusCode.BadRequest
+                });
+                return this.GetResponse(new BaseResponse()
+                {
+                    Message = ex.Message,
+                    Success = false,
+                    ResponseCode = (int)HttpStatusCode.BadRequest
+                });
+            }
+            catch (Exception ex)
+            {
+                await _mediator.Send(new CreateLogMessage()
+                {
+                    Message = ex.Message,
+                    IsError = true,
+                    ErrorCode = (int)HttpStatusCode.InternalServerError
+                });
+                return this.GetResponse(new BaseResponse()
+                {
+                    Message = ex.Message,
+                    Success = false,
+                    ResponseCode = (int)HttpStatusCode.InternalServerError
+                });
+            }      
         }
     }
 }

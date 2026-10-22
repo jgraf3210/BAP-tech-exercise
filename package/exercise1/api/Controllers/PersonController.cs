@@ -53,8 +53,32 @@ namespace StargateAPI.Controllers
 
                 return this.GetResponse(result);
             }
+            
+            catch(BadHttpRequestException ex)
+            {
+                await _mediator.Send(new CreateLogMessage()
+                {
+                    Message = ex.Message,
+                    IsError = true,
+                    ErrorCode = (int)HttpStatusCode.BadRequest
+                });
+                return this.GetResponse(new BaseResponse()
+                {
+                    Message = ex.Message,
+                    Success = false,
+                    ResponseCode = (int)HttpStatusCode.BadRequest
+                });
+            }
             catch (Exception ex)
             {
+
+                await _mediator.Send(new CreateLogMessage()
+                {
+                    Message = ex.Message,
+                    IsError = true,
+                    ErrorCode = (int)HttpStatusCode.InternalServerError
+                });
+
                 return this.GetResponse(new BaseResponse()
                 {
                     Message = ex.Message,
@@ -74,10 +98,23 @@ namespace StargateAPI.Controllers
                     Name = name
                 });
 
+                await _mediator.Send(new CreateLogMessage()
+                {
+                    Message = $"Person {name} created successfully",
+                    IsError = false,
+                    ErrorCode = null
+                });
+
                 return this.GetResponse(result);
             }
             catch(BadHttpRequestException ex)
             {
+                await _mediator.Send(new CreateLogMessage()
+                {
+                    Message = ex.Message,
+                    IsError = true,
+                    ErrorCode = (int)HttpStatusCode.BadRequest
+                });
                 return this.GetResponse(new BaseResponse()
                 {
                     Message = ex.Message,
@@ -87,6 +124,13 @@ namespace StargateAPI.Controllers
             }
             catch (Exception ex)
             {
+                
+                await _mediator.Send(new CreateLogMessage()
+                {
+                    Message = ex.Message,
+                    IsError = true,
+                    ErrorCode = (int)HttpStatusCode.InternalServerError
+                });
                 return this.GetResponse(new BaseResponse()
                 {
                     Message = ex.Message,
