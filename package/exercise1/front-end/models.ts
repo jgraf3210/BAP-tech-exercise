@@ -40,3 +40,8 @@ export interface GetAllPeopleResponse {
   message: string,
   responseCode: number
 }
+
+export interface GetAstronautDutyByPersonNameResponse {
+  person: PersonAstronaut,
+  astronautDuties: AstronautDuty[]
+}

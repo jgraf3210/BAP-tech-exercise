@@ -20,7 +20,6 @@ import { ViewPersonDutyDialogComponent } from "./view-person-duty-dialog/view-pe
 export class HomeComponent implements OnInit{
 
   public personsService = inject(PersonsService)
-  private readonly router = inject(Router)
   public persons = signal<PersonAstronaut[]>([])
   public title = 'Home page'
 
@@ -34,19 +33,16 @@ export class HomeComponent implements OnInit{
     this.persons.set(await this.personsService.getAllPeople());
   }
 
-  public viewPerson(person: PersonAstronaut): void {
-    void this.router.navigate(['/view'], { state: { person } });
-  }
-
   /**
    * Opens a dialog to edit the selected Item
    * @param item The Item to edit
    */
-  public editItem(person: PersonAstronaut) {
+  public openPersonDialog(person: PersonAstronaut) {
     this.dialog.open(
       ViewPersonDutyDialogComponent, {
+      maxHeight: '60vh',
       data: {
-        person: person
+        name: person.name
       },
     }).afterClosed().subscribe()
   }

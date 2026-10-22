@@ -33,7 +33,7 @@ export class PersonsService {
     let url = this.baseUrl + '/get';
 
     return new Promise<Person>((resolve, reject) =>
-      this.http.post<Person>(url, { body: person.name })
+      this.http.post<Person>(url, person.name)
         .subscribe({
           next: (items: Person) => resolve(items),
           error: (error: Error) => reject(error)

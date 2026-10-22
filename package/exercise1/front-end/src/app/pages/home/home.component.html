@@ -9,12 +9,12 @@
       <thead>
         <tr>
           <th>Name</th>
-          <th>Duty</th>
+          <th>Current Duty</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let person of persons()"
-            (click)="viewPerson(person)"
+            (click)="openPersonDialog(person)"
             class="person-row">
           <td>{{ person.name }}</td>
           <td>{{ person.currentDutyTitle || '—' }}</td>

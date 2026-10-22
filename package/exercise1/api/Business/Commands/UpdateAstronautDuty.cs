@@ -63,9 +63,9 @@ namespace StargateAPI.Business.Commands
         public async Task<UpdateAstronautDutyResult> Handle(UpdateAstronautDuty request, CancellationToken cancellationToken)
         {
 
-            var personId = await _context.Person
+            var personId = _context.People
                 .AsNoTracking()
-                .FirstOrDefaultAsync(z => z.Name == request.Name, cancellationToken).Id;
+                .FirstOrDefault(z => z.Name == request.Name).Id;
 
             var astronautDetail = await _context.AstronautDetails
                 .AsNoTracking()
@@ -79,12 +79,11 @@ namespace StargateAPI.Business.Commands
                     CurrentDutyTitle = request.DutyTitle,
                     CurrentRank = request.Rank,
                     CareerStartDate = request.DutyStartDate.Date,
-                    astronautDetail.CareerEndDate = request.DutyTitle.ToUpper() == "RETIRED" 
+                    CareerEndDate = request.DutyTitle.ToUpper() == "RETIRED" 
                                 ? request.DutyStartDate.Date : null
                 };
 
-                await _context.AstronautDetails.AddAsync(astronautDetail);
-
+                await _context.AstronautDetails.AddAsync(astronautDetail, cancellationToken);
             }
             else
             {
@@ -95,10 +94,10 @@ namespace StargateAPI.Business.Commands
                 _context.AstronautDetails.Update(astronautDetail);
             }
 
-            var duty = await _context.AstronautDuties
+            var duty = (await _context.AstronautDuties
                 .AsNoTracking()
-                .FirstOrDefaultAsync(z => z.PersonId == personId, cancellationToken)
-                .OrderByDescending(z => z.DutyStartDate);
+                
+                .FirstOrDefaultAsync(z => z.PersonId == personId, cancellationToken));
 
             if (duty != null)
             {
@@ -108,7 +107,7 @@ namespace StargateAPI.Business.Commands
 
             var newAstronautDuty = new AstronautDuty()
             {
-                PersonId = person.Id,
+                PersonId = personId,
                 Rank = request.Rank,
                 DutyTitle = request.DutyTitle,
                 DutyStartDate = request.DutyStartDate.Date,
