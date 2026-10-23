@@ -1,6 +1,13 @@
+using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using StargateAPI.Business.Queries;
+using StargateAPI.Business.Data;
 
 public class GetPersonByNameTests
 {
+    private readonly Mock<StargateContext> _context;
+    public Mock<GetPersonByName> _getPersonByName = new Mock<GetPersonByName>();
+
     
     public GetPersonByNameTests()
     {
@@ -11,7 +18,6 @@ public class GetPersonByNameTests
     public void VerifyQueryOnlyReturnsRequestedData()
     {
         //Verify that the query only returns specific data when there are multiple records
-
     }
 
 

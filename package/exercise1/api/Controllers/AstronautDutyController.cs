@@ -26,6 +26,12 @@ namespace StargateAPI.Controllers
                 {
                     Name = name
                 });
+                await _mediator.Send(new CreateLogMessage()
+                {
+                    Message = $"Returning AstronautDuty objects for {name}",
+                    IsError = true,
+                    ErrorCode = null
+                });
 
                 return this.GetResponse(result);
             }
@@ -73,6 +79,15 @@ namespace StargateAPI.Controllers
                     DutyTitle = request.DutyTitle,
                     DutyStartDate = request.DutyStartDate
                 });
+
+                
+                await _mediator.Send(new CreateLogMessage()
+                {
+                    Message = $"Successfully created new AstronautDuty",
+                    IsError = true,
+                    ErrorCode = null
+                });
+
                 return this.GetResponse(result);         
             }
             catch(BadHttpRequestException ex)

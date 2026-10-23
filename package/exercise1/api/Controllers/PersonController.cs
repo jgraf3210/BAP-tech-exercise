@@ -28,6 +28,13 @@ namespace StargateAPI.Controllers
                     
                 });
 
+                await _mediator.Send(new CreateLogMessage()
+                {
+                    Message = $"Returning all Person data",
+                    IsError = false,
+                    ErrorCode = null
+                });
+
                 return this.GetResponse(result);
             }
             catch (Exception ex)
@@ -49,6 +56,13 @@ namespace StargateAPI.Controllers
                 var result = await _mediator.Send(new GetPersonByName()
                 {
                     Name = person.Name
+                });
+
+                await _mediator.Send(new CreateLogMessage()
+                {
+                    Message = $"Return data for Person {person.Name}",
+                    IsError = false,
+                    ErrorCode = null
                 });
 
                 return this.GetResponse(result);

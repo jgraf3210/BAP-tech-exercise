@@ -59,7 +59,7 @@ namespace StargateAPI.Business.Commands
 
             var person = await _context.People
                     .AsNoTracking()
-                    .FirstOrDefaultAsync(p => p.Name == request.Name);
+                    .FirstOrDefaultAsync(p => p.Name == request.Name, cancellationToken);
 
             var astronautDetail = await _context.AstronautDetails
                    .FirstOrDefaultAsync(d => d.PersonId == person.Id, cancellationToken);
@@ -78,7 +78,7 @@ namespace StargateAPI.Business.Commands
                     astronautDetail.CareerEndDate = request.DutyStartDate.Date;
                 }
 
-                await _context.AstronautDetails.AddAsync(astronautDetail);
+                await _context.AstronautDetails.AddAsync(astronautDetail, cancellationToken);
 
             }
             else

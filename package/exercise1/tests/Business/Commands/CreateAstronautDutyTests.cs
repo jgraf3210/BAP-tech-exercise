@@ -7,6 +7,7 @@ public class CreateAstronautDutyTests
 {
     
     public Mock<StargateContext> _context = new Mock<StargateContext>();
+    public Mock<CreateAstronautDuty> _createAstronautDuty = new Mock<CreateAstronautDuty>();
     
     public CreateAstronautDutyTests()
     {

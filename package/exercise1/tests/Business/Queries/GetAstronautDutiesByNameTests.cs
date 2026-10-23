@@ -1,7 +1,12 @@
-
+using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using StargateAPI.Business.Queries;
+using StargateAPI.Business.Data;
 public class GetAstronautDutiesByNameTests
 {
-    
+    private readonly Mock<StargateContext> _context;
+    public Mock<GetAstronautDutiesByName> _getAstronautDutiesByName = new Mock<GetAstronautDutiesByName>();
+
     public GetAstronautDutiesByNameTests()
     {
         

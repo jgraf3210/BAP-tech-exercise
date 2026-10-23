@@ -6,7 +6,7 @@ using StargateAPI.Business.Data;
 public class CreatePersonTests
 {
     public Mock<StargateContext> _context = new Mock<StargateContext>();
-
+    public Mock<CreatePerson> _createPerson = new Mock<CreatePerson>();
     
     public CreatePersonTests()
     {
